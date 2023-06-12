@@ -6,6 +6,7 @@
 }
 body{
   background-color: azure;
+  font-family: 'Lobster';
 }
 
 .grid-container {
@@ -53,6 +54,7 @@ body{
 
 .drum-pad.clicked {
   background-color: darkgray;
+  filter: brightness(0.9);
 }
 .drum-pad:hover{
   transform: scale(1.08);
@@ -60,11 +62,16 @@ body{
   background-color: gray;
 }
 
+.drum-pad:active,
+.drum-pad:focus {
+  background-color: gray !important;  
+}
+
 .text-background {
   background-color: gray;
-  padding: 4px;
+  padding: 15px;
   color: white;
-  width: 150px;
+  width: 200px;
   display: block;
   align-items: center;
   border: 3px black solid;
@@ -125,7 +132,10 @@ input:checked+.slider:before {
 }
 .switch-label {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 1px;
+}
+#volume-slider{
+  margin-bottom: 30px !important;
 }
 
 .centered {
@@ -140,10 +150,19 @@ input:checked+.slider:before {
   align-items: center;
   margin-bottom: 20px;
 }
+.switch-container:first-of-type {
+  margin-bottom: 30px;
+}
+
 .col-md-7 {
   padding: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+@font-face {
+  font-family: 'Lobster';
+  src: url('../public/fonts/Lobster-Regular.ttf');  
 }
