@@ -25,6 +25,7 @@ function App() {
   const [powerOn, setPowerOn] = useState(false);
   const [sliderValue, setSliderValue] = useState(50);
   const [lableValue, setLableValue] = useState('Turn On the Power');
+  const [volume, setVolume] = useState(50);
 
   const handlePowerClick = () => {
     setPowerOn(!powerOn);
@@ -33,9 +34,17 @@ function App() {
     else
     handleLabelChange('');
   };
-
+ 
   const handleSliderChange = (e) => {
     setSliderValue(Number(e.target.value));
+    const newVolume = Number(e.target.value);
+    setVolume(newVolume);
+    setLableValue(`Volume: ${newVolume}`);
+    let labelTimer;
+  clearTimeout(labelTimer);
+  labelTimer = setTimeout(() => {
+    handleLabelChange('');
+  }, 2000);
   };
 
   const keySoundMap = {
@@ -52,9 +61,9 @@ function App() {
 
   const handleButtonClick = (key) => {
      if (!powerOn) return;
-
      handleLabelChange(key);
      const audio = new Audio(`audio/${keySoundMap[key]}`);
+     audio.volume = volume / 100;
     audio.play();
   };
 
