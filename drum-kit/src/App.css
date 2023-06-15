@@ -66,15 +66,18 @@ body{
 .drum-pad:focus {
   background-color: gray !important;  
 }
-
+#display{
+  height:100px;
+}
 .text-background {
   background-color: gray;
   padding: 15px;
   color: white;
   width: 200px;
   display: block;
+  font-size: 20px;
   align-items: center;
-  border: 3px black solid;
+  border: 6px black solid;
 }
 .switch {
   position: relative;
@@ -148,11 +151,11 @@ input:checked+.slider:before {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
 }
-.switch-container:first-of-type {
-  margin-bottom: 30px;
+.switch-container:last-of-type {
+  margin-top: 50px;
 }
+
 
 .col-md-7 {
   padding: 5px;

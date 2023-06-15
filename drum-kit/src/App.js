@@ -23,16 +23,15 @@ const DrumPad = ({ keyName, handleButtonClick }) => {
 
 function App() {
   const [powerOn, setPowerOn] = useState(false);
-  const [bankOn, setBankOn] = useState(false);
   const [sliderValue, setSliderValue] = useState(50);
-  const [lableValue, setLableValue] = useState('Play a Sound');
+  const [lableValue, setLableValue] = useState('Turn On the Power');
 
   const handlePowerClick = () => {
     setPowerOn(!powerOn);
-  };
-
-  const handleBankClick = () => {
-    setBankOn(!bankOn);
+    if (powerOn)
+    handleLabelChange('OFF');
+    else
+    handleLabelChange('');
   };
 
   const handleSliderChange = (e) => {
@@ -52,8 +51,10 @@ function App() {
   };
 
   const handleButtonClick = (key) => {
-    handleLabelChange(key);
-    const audio = new Audio(`audio/${keySoundMap[key]}`);
+     if (!powerOn) return;
+
+     handleLabelChange(key);
+     const audio = new Audio(`audio/${keySoundMap[key]}`);
     audio.play();
   };
 
@@ -85,6 +86,12 @@ function App() {
         break;
       case 'C':
         setLableValue('Closed HH');
+        break;
+      case '':
+        setLableValue('');
+        break;
+      case 'OFF':
+        setLableValue('Power OFF');
         break;
       default:
         setLableValue('');
@@ -125,7 +132,7 @@ function App() {
       <div id="drum-machine" className="container rounded">
         <div className="row">
           <div className="col-md-7">
-            <div id="display" className="grid-container">
+            <div className="grid-container">
               <DrumPad keyName="Q" handleButtonClick={handleButtonClick} />
               <DrumPad keyName="W" handleButtonClick={handleButtonClick} />
               <DrumPad keyName="E" handleButtonClick={handleButtonClick} />
@@ -139,16 +146,6 @@ function App() {
           </div>
           <div className="col-md-5">
             <div className="power-band-container">
-              <div className="switch-container">
-                <div className="switch-label">Power</div>
-                <label className="switch">
-                  <input type="checkbox" checked={powerOn} onChange={handlePowerClick} />
-                  <span className="slider round"></span>
-                </label>
-              </div>
-              <div className="info-field">
-                <span className="text-background centered">{lableValue}</span>
-              </div>
               <div>
                 <input
                   id="volume-slider"
@@ -160,13 +157,16 @@ function App() {
                   onChange={handleSliderChange}
                 />
               </div>
+              <div id="display" className="info-field">
+                <span className="text-background centered">{lableValue}</span>
+              </div>
               <div className="switch-container">
-                <div className="switch-label">Bank</div>
+                <div className="switch-label">Power</div>
                 <label className="switch">
-                  <input type="checkbox" checked={bankOn} onChange={handleBankClick} />
+                  <input type="checkbox" checked={powerOn} onChange={handlePowerClick} />
                   <span className="slider round"></span>
                 </label>
-              </div>
+              </div>              
             </div>
           </div>
         </div>
